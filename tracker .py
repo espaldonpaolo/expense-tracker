@@ -1,6 +1,6 @@
-#Project: Expense Tracker - Installment 3: Tracker does math
+#Project: Expense Tracker - Installment 4: The Tracker Makes Decisions
 #Author: Paolo R. Espaldon
-#Description: A simple program to track two expenses, calculate tax, and check a budget.
+#Description: A simple program to track expenses and make budget decisions.
 print("=" * 40)
 print(" " * 12 +"EXPENSE TRACKER")
 print(" " * 6 +"Spend Smart, Save More.")
@@ -16,14 +16,32 @@ subtotal = 0
 item1 = input("\nFirst expense? ")
 amount1 = float(input(f"Amount? "))
 subtotal += amount1
+if amount1 > 200:
+    print(" Huge expense - are you sure?")
+elif amount1 > 100:
+    print(" Big expense.")
+elif amount1 > 50:
+    print(" Moderate expense.")
+else: 
+    print (" Small expense.")
 item2 = input("Second expense? ")
 amount2 = float(input(f"Amount? "))
 subtotal += amount2
+if amount2 > 200:
+    print(" Huge expense - are you sure?")
+elif amount2 > 100:
+    print(" Big expense.")
+elif amount2 > 50:
+    print(" Moderate expense.")
+else: 
+    print (" Small expense.")
+if amount1 > 100 and amount2 > 100:
+    print(" Two big expenses in a row - slow down!")
 average = subtotal / 2
 tax_percent = int(input ("Tax rate (%)? "))
 tax = subtotal * (tax_percent / 100)
 total = subtotal + tax
-budget = float(input("Budget ?"))
+budget = float(input("Budget? "))
 over_budget = total > budget
 left = budget - total
 print("-" * 40)
@@ -34,8 +52,12 @@ print(f"{'Subtotal:'.ljust(16)}${subtotal}")
 print(f"{'Average:'.ljust(16)}${average}")
 print(f"{('Tax (' + str(tax_percent) + '%):').ljust(16)}${tax}")
 print(f"{'Grand total:'.ljust(16)}${total}")
-print(f"{'Over budget?'.ljust(16)}{over_budget}")
-print(f"{'Left in budget:'.ljust(16)}${left}")
+if over_budget:
+    print(f"Over budget by ${abs(left)}!")
+elif total > budget * 0.90:
+    print(f"Careful: only ${left} left.")
+else:
+    print(f"Within budget. ${left} left.")
 print("-" * 40)
-print(f"Made by: Paolo Espaldon | Installment 3")
+print(f"Made by: Paolo Espaldon | Installment 4")
 print("=" * 40)
